@@ -24,7 +24,7 @@ import com.xhkj.app.DirListData
 import com.xhkj.khjmvp.R
 import com.xhkj.khjmvp.activity.EditActivity
 import com.xhkj.khjmvp.main.TabEntity
-import kotlinx.android.synthetic.main.fragment_file1.*
+import kotlinx.android.synthetic.main.fragment_file.*
 
 
 class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), FileContract.View {
@@ -76,7 +76,7 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_file1, container, false)
+        return inflater.inflate(R.layout.fragment_file, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

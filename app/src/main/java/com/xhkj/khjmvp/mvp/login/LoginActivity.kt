@@ -39,12 +39,8 @@ class LoginActivity : MvpActivity<LoginContract.View, LoginContract.Presenter>()
         Toastor(this).showToast(msg)
     }
 
-    override fun loginSuccess(data: LoginBean) {
-
-        Preference(App.instance).put("host", edt_host.text.toString())
-        Preference(App.instance).put("token", data.token)
-
-        intent = Intent(this, MainActivity::class.java)
+    override fun loginSuccess(data: LoginBean?) {
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         this.finish()
     }

@@ -1,6 +1,5 @@
 package com.xhkj.khjmvp.mvp.monitort
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle

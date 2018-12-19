@@ -9,6 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
 import com.xhkj.khjmvp.R
+import com.xhkj.khjmvp.main.MainActivity
 import com.xhkj.khjmvp.mvp.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_start.*
 
@@ -38,9 +39,11 @@ class StartActivity : AppCompatActivity() {
 
     private fun toNext(cdt:MyCountDownTimer) {
         cdt.cancel()
+       /* startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+        finishAfterTransition()*/
         val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-        finishAfterTransition()
+        startActivity(intent)
+        this.finish()
     }
 
 

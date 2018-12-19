@@ -85,6 +85,7 @@ class EditActivity : AppCompatActivity() {
             .params("dir", path!!.replace(name!!, ""))
             .params("name", name)
             .params("content", content)
+            .params("token", Preference(App.instance).getString("token"))
             .execute(object: JsonCallback<BaseBean<List<String>>>(type) {
 
                 override fun onSuccess(response: Response<BaseBean<List<String>>>?) {

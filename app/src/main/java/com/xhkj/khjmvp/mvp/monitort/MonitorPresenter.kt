@@ -29,15 +29,16 @@ class MonitorPresenter : MvpQueuingBasePresenter<MonitorContract.View>()
                 override fun onSuccess(response: Response<BaseBean<List<HostInfo>>>?) {
                     val bean = response?.body()
 
-                    if (bean?.status != 1) {
-                        ifViewAttached { view ->
-                            view.showToast(bean?.message  + "H")
+                    bean?.let {
+                        if (it.status != 1) {
+                            ifViewAttached { view ->
+                                view.showToast(it.message)
+                            }
+                            return
                         }
-                    }
 
-                    ifViewAttached { view ->
-                        if(bean?.data!!.isNotEmpty()) {
-                            view.updateHostInfo(bean.data?.get(0))
+                        ifViewAttached { view ->
+                            view.updateHostInfo(it.data?.get(0))
                         }
                     }
 
@@ -67,15 +68,17 @@ class MonitorPresenter : MvpQueuingBasePresenter<MonitorContract.View>()
                 override fun onSuccess(response: Response<BaseBean<List<CpuInfo>>>?) {
                     val bean = response?.body()
 
-                    if (bean?.status != 1) {
-                        ifViewAttached { view ->
-                            view.showToast(bean?.message + "C")
+                    bean?.let {
+                        if (it.status != 1) {
+                            ifViewAttached { view ->
+                                view.showToast(it.message)
+                            }
+                            return
                         }
-                    }
 
-                    ifViewAttached { view ->
-                        val Info = bean?.data
-                        view.updateCpuInfo(Info?.get(0))
+                        ifViewAttached { view ->
+                            view.updateCpuInfo(it.data?.get(0))
+                        }
                     }
 
                 }
@@ -103,15 +106,16 @@ class MonitorPresenter : MvpQueuingBasePresenter<MonitorContract.View>()
                 override fun onSuccess(response: Response<BaseBean<List<MemoryDiskInfo>>>?) {
                     val bean = response?.body()
 
-                    if (bean?.status != 1) {
-                        ifViewAttached { view ->
-                            view.showToast(bean?.message + "M")
+                    bean?.let {
+                        if (it.status != 1) {
+                            ifViewAttached { view ->
+                                view.showToast(it.message)
+                            }
+                            return
                         }
-                    }
 
-                    ifViewAttached { view ->
-                        if(bean?.data!!.isNotEmpty()) {
-                            view.updateMemoryInfo(bean.data?.get(0))
+                        ifViewAttached { view ->
+                            view.updateMemoryInfo(it.data?.get(0))
                         }
                     }
 
@@ -140,15 +144,16 @@ class MonitorPresenter : MvpQueuingBasePresenter<MonitorContract.View>()
                 override fun onSuccess(response: Response<BaseBean<List<MemoryDiskInfo>>>?) {
                     val bean = response?.body()
 
-                    if (bean?.status != 1) {
-                        ifViewAttached { view ->
-                            view.showToast(bean?.message + "D")
+                    bean?.let {
+                        if (it.status != 1) {
+                            ifViewAttached { view ->
+                                view.showToast(it.message)
+                            }
+                            return
                         }
-                    }
 
-                    ifViewAttached { view ->
-                        if(bean?.data!!.isNotEmpty()) {
-                            view.updateDiskInfo(bean.data?.get(0))
+                        ifViewAttached { view ->
+                            view.updateDiskInfo(it.data?.get(0))
                         }
                     }
 
@@ -177,17 +182,16 @@ class MonitorPresenter : MvpQueuingBasePresenter<MonitorContract.View>()
                 override fun onSuccess(response: Response<BaseBean<List<NetworkInfo>>>?) {
                     val bean = response?.body()
 
-                    if (bean?.status != 1) {
+                    bean?.let {
+                        if (it.status != 1) {
+                            ifViewAttached { view ->
+                                view.showToast(it.message)
+                            }
+                        }
+
                         ifViewAttached { view ->
-                            view.showToast(bean?.message + "N")
+                            view.updateNetworkInfo(it.data?.get(0))
                         }
-                    }
-
-                    ifViewAttached { view ->
-                        if(bean?.data!!.isNotEmpty()) {
-                            view.updateNetworkInfo(bean.data?.get(0))
-                        }
-
                     }
 
                 }

@@ -18,7 +18,8 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		tools:ignore="GoogleAppIndexingWarning">
-		<activity android:name=".activity.StartActivity">
+		<activity android:name=".activity.StartActivity"
+			android:theme="@style/AppTheme.Start">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 

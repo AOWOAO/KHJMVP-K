@@ -6,7 +6,9 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.lzy.okgo.request.base.Request
 import com.xhkj.app.BaseBean
+import com.xhkj.khjmvp.App
 import com.xhkj.khjmvp.mvp.JsonCallback
+import com.xhkj.khjmvp.utils.Preference
 
 class LoginPresenter : MvpQueuingBasePresenter<LoginContract.View>(), LoginContract.Presenter {
 
@@ -28,13 +30,24 @@ class LoginPresenter : MvpQueuingBasePresenter<LoginContract.View>(), LoginContr
                 override fun onSuccess(response: Response<BaseBean<LoginBean>>?) {
                     val bean = response?.body()
 
-                    ifViewAttached { view ->
-                        view.showToast(bean?.message)
-                    }
+                    /** ?.let 判断非空*/
+                    bean?.let {
 
-                    if (bean?.status == 1) {
                         ifViewAttached { view ->
-                            view.loginSuccess(bean.data!!)
+                            view.showToast(it.message)
+                        }
+
+                        if (it.status == 1) {
+                            ifViewAttached { view ->
+
+                                /*保存用户登录数据*/
+                                it.data?.url?.let { Preference(App.instance).put("host", "$it/") }
+                                it.data?.token?.let { Preference(App.instance).put("token", it) }
+                                Preference(App.instance).put("user", user)
+                                Preference(App.instance).put("pwd", pwd)
+
+                                view.loginSuccess(it.data)
+                            }
                         }
                     }
 

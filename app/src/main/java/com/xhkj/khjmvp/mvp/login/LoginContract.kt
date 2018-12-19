@@ -9,7 +9,7 @@ class LoginContract {
         fun showToast(msg:String?)
         fun showLoading()
         fun hideLoading()
-        fun loginSuccess(data: LoginBean)
+        fun loginSuccess(data: LoginBean?)
     }
 
 
