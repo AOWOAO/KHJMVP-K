@@ -1,17 +1,20 @@
 package com.xhkj.khjmvp.mvp.file
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import com.flyco.dialog.entity.DialogMenuItem
 import com.flyco.dialog.listener.OnBtnClickL
 import com.flyco.dialog.widget.NormalDialog
 import com.flyco.dialog.widget.NormalListDialog
+import com.flyco.tablayout.listener.CustomTabEntity
+import com.flyco.tablayout.listener.OnTabSelectListener
 import com.hannesdorfmann.mosby3.mvp.MvpFragment
 import com.litesuits.android.log.Log
 import com.litesuits.common.assist.Toastor
@@ -19,16 +22,20 @@ import com.litesuits.common.utils.VibrateUtil
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.xhkj.app.DirListData
 import com.xhkj.khjmvp.R
-import kotlinx.android.synthetic.main.fragment_file.*
+import com.xhkj.khjmvp.activity.EditActivity
+import com.xhkj.khjmvp.main.TabEntity
+import kotlinx.android.synthetic.main.fragment_file1.*
 
 
 class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), FileContract.View {
 
 
     private lateinit var mContext: Context
+    private var dirs = ArrayList<String>()
     private var li = ArrayList<DirListData.Detail>()
+    private var filePathRvAdapter: FilePathRvAdapter? = null
     private var fileRvAdapter: FileRvAdapter? = null
-    private var path: String? = "/data/wwwroot/"
+    private var path: String? = "/"
 
     override fun createPresenter(): FileContract.Presenter {
         return FilePresenter()
@@ -40,20 +47,21 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
 
     override fun updateDirList(data: DirListData?) {
 
-        showToast(path)
-        if (data!!.type == 1) { //文件夹
+        dirs.clear()
+        path = data!!.dir + "/"
 
-            path = data.dir!!.replace(" ", "")
+        //showToast("log: $path")
 
-            pathEdt.setText(path)
+        val p = path!!.split("/")
 
-            li = data.detail!!
-
-            fileRvAdapter!!.data = li
-
-        } else {//文件
-            openFile(null)
+        for (dir in p) {
+            if (!dir.isBlank()) dirs.add(dir)
         }
+        filePathRvAdapter!!.data = dirs
+        pathRecycle.smoothScrollToPosition(dirs.size)
+
+        li = data.detail!!
+        fileRvAdapter!!.data = li
     }
 
 
@@ -68,7 +76,7 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_file, container, false)
+        return inflater.inflate(R.layout.fragment_file1, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -77,19 +85,13 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
         initRecyclerView()
         fabCtrl()
 
-        pathEdt.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_GO) {
+        rootPath.setOnClickListener {
+            dirs.clear()
+            filePathRvAdapter!!.data = dirs
 
-                //oldPath = path //记录手动输入前的路径
-
-                path = pathEdt.text.toString().replace(" ", "")
-
-                presenter.getDirList(path)
-
-            }
-
-            false
+            presenter.getDirList("/")
         }
+
     }
 
     override fun onStart() {
@@ -100,11 +102,29 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
 
     private fun initRecyclerView() {
 
+        //filePathRecycle
+        pathRecycle.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+        filePathRvAdapter = FilePathRvAdapter(pathRecycle)
+        pathRecycle.adapter = filePathRvAdapter
+
+        filePathRvAdapter!!.setOnRVItemClickListener { _, _, position ->
+
+            //处理path
+            if (position + 1 < dirs.size) {
+                var dir: String? = "/"
+                for (i in 0 until position + 1) {
+                    dir += "${dirs[i]}/"
+                }
+                presenter.getDirList(dir)
+            }
+        }
+
+
+        //fileRecycle
         fileRecycle.layoutManager = LinearLayoutManager(mContext)
-
         fileRvAdapter = FileRvAdapter(fileRecycle)
-
         fileRecycle.adapter = fileRvAdapter
+
 
         fileRvAdapter!!.setOnRVItemClickListener { parent, itemView, position ->
 
@@ -112,14 +132,15 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
             fabMenu.closeMenu()
             //showDialog(position)
             openFile(position)
+
         }
 
-        fileRvAdapter!!.setOnRVItemLongClickListener { parent, itemView, position ->
+        fileRvAdapter!!.setOnRVItemLongClickListener { _, _, position ->
 
             VibrateUtil.vibrate(mContext, 100)
             //showToast("longClick")
             showDialog(position)
-            false
+            return@setOnRVItemLongClickListener true
         }
 
 
@@ -136,7 +157,7 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
         }
         mMenuItems.add(DialogMenuItem("重命名", R.drawable.ic_dialog_rename))
         mMenuItems.add(DialogMenuItem("复制", R.drawable.ic_dialog_copy))
-        mMenuItems.add(DialogMenuItem("剪切", R.drawable.ic_dialog_rename))
+        mMenuItems.add(DialogMenuItem("剪切", R.drawable.ic_dialog_cut))
         mMenuItems.add(DialogMenuItem("删除", R.drawable.ic_dialog_del))
 
         val dialog = NormalListDialog(mContext, mMenuItems)
@@ -152,7 +173,11 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
 
                 1 -> renameFile(pos)
 
-                2 -> delFile(pos)
+                2 -> copyNcutFile(pos, "1")
+
+                3 -> copyNcutFile(pos, "2")
+
+                4 -> delFile(pos)
             }
 
             dialog.dismiss()
@@ -162,41 +187,29 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
 
     private fun openFile(pos: Int?) {
 
-        if (pos != null) { //代表是通过点击列表来操作
+        when {
+            li[pos!!].df == 1 -> {//打开文件夹
 
-            when {
-                li[pos].df == 1 -> {//打开文件夹
+                path += li[pos].name + "/"
 
-                    path += li[pos].name + "/"
+                presenter.getDirList(path)
 
-                    pathEdt.setText(path)
-
-                    presenter.getDirList(path)
-
-                }
-                li[pos].df == 2 -> {//打开文本文件
-
-                    val bundle = Bundle()
-                    bundle.putString("title", li[pos].name)
-                    bundle.putString("path", path + li[pos].name)
-                    showToast("open textFile")
-
-                    //TODO 打开EditActivity
-                    /*val intent = Intent(mContext, EditActivity::class.java)
-                        intent.putExtras(bundle)
-                        mContext.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())*/
-
-                }
-                li[pos].df == 5 -> presenter.openZip(path + li[pos].name, path!!) //打开zip
-
-                else -> Toastor(mContext).showToast("不支持打开此类型的文件")
             }
+            li[pos].df == 2 -> {//打开文本文件
 
+                val bundle = Bundle()
+                bundle.putString("title", li[pos].name)
+                bundle.putString("path", path + li[pos].name)
 
-        } else { //代表通过手动输入path来操作
+                //TODO 打开EditActivity
+                val intent = Intent(mContext, EditActivity::class.java)
+                    intent.putExtras(bundle)
+                    mContext.startActivity(intent)
 
-            Toastor(mContext).showToast("无法通过绝对路径操作文件,请到文件目录通过点击操作")
+            }
+            li[pos].df == 5 -> presenter.openZip(path + li[pos].name, path!!) //打开zip
 
+            else -> showToast("不支持打开此类型的文件")
         }
 
     }
@@ -226,6 +239,7 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
     }
 
     private fun delFile(pos: Int?) {
+
         val dialog = NormalDialog(mContext)
         dialog.title("删除")
             .content("是否删除: " + li[pos!!].name)
@@ -245,6 +259,69 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
 
             })
 
+    }
+
+    private fun copyNcutFile(pos: Int?, cmd: String) {
+        showToast("请选择粘帖目录")
+        fabMenu.visibility = View.INVISIBLE
+
+        val file = path + li[pos!!].name
+
+        //showToast("file: $file")
+
+        val mTitles: Array<String> = arrayOf("新建", "粘帖", "取消")
+        val mIconUnSelectIds: IntArray =
+            intArrayOf(R.drawable.ic_new_dir, R.drawable.ic_dialog_copy, R.drawable.ic_cencal)
+        val mIconSelectIds: IntArray =
+            intArrayOf(R.drawable.ic_new_dir, R.drawable.ic_dialog_copy, R.drawable.ic_cencal)
+
+        val mTabEntities = ArrayList<CustomTabEntity>()
+        for (i in mTitles.indices) {
+            mTabEntities.add(TabEntity(mTitles[i], mIconSelectIds[i], mIconUnSelectIds[i]))
+        }
+
+        tabLayout.setTabData(mTabEntities)
+        tabLayout.visibility = View.VISIBLE
+        tabLayout.setOnTabSelectListener(object : OnTabSelectListener {
+
+            override fun onTabSelect(position: Int) {
+                when (position) {
+                    0 -> addNewDir()
+
+                    1 -> {
+                        presenter.moveFile(cmd, file, path!!)
+                        tabLayout.visibility = View.GONE
+                        fabMenu.visibility = View.VISIBLE
+                        Log.i("------copy-----","操作的文件: $file  粘帖的路径: $path")
+                    }
+
+                    2 -> {
+                        tabLayout.visibility = View.GONE
+                        fabMenu.visibility = View.VISIBLE
+                    }
+                }
+            }
+
+            override fun onTabReselect(position: Int) {
+                when (position) {
+                    0 -> addNewDir()
+
+                    1 -> {
+                        presenter.moveFile(cmd, file, path!!)
+                        tabLayout.visibility = View.GONE
+                        fabMenu.visibility = View.VISIBLE
+                        Log.i("------copy-----","操作的文件: $file  粘帖的路径: $path")
+                    }
+
+                    2 -> {
+                        tabLayout.visibility = View.GONE
+                        fabMenu.visibility = View.VISIBLE
+                    }
+                }
+            }
+        })
+
+        //presenter.moveFile(cmd, file, "")
     }
 
 
@@ -282,7 +359,7 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
                     dialog.dismiss()
 
                 } else {
-                    Toastor(mContext).showToast("文件夹名不能为空")
+                    showToast("文件夹名不能为空")
                 }
 
             }
@@ -308,7 +385,7 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
                     dialog.dismiss()
 
                 } else {
-                    Toastor(mContext).showToast("文件名不能为空")
+                    showToast("文件名不能为空")
                 }
 
             }
@@ -318,21 +395,27 @@ class FileFragment : MvpFragment<FileContract.View, FileContract.Presenter>(), F
 
     private fun updateFile() {
 
-        //TODO updateFile
-        /*val type = object : TypeToken<BaseBean<String>>() {}.type
-        OkGo.post<BaseBean<String>>("http://test.phpweilai.cc/admin/file/upload")
-                .params("dir", path)
-                .params("create_dir", "")
-                .execute(object: JsonCallback<BaseBean<String>>(type) {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"//所有类型文件
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivityForResult(intent, 1)
 
-                    override fun onSuccess(response: Response<BaseBean<String>>?) {
-                        val bean = response!!.body()
-                        Toastor(mContext).showToast(bean.message)
-                    }
 
-                })*/
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            val uri = data!!.data
+            if ("file".equals(uri.scheme, ignoreCase = true)) {//使用第三方应用打开
+                val localPath = uri.path
+                presenter.updateFile(path!!, localPath)
+                //showToast(localPath)
+                return
+            }
+
+        }
+    }
 
 }
 

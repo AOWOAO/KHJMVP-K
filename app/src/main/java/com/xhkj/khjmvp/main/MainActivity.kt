@@ -11,7 +11,6 @@ import com.litesuits.common.assist.Toastor
 import com.litesuits.common.utils.VibrateUtil
 import com.xhkj.khjmvp.R
 import com.xhkj.khjmvp.mvp.file.FileFragment
-import com.xhkj.khjmvp.mvp.file.FileFragment1
 import com.xhkj.khjmvp.mvp.home.HomeFragment
 import com.xhkj.khjmvp.mvp.monitort.MonitorFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         val items: ArrayList<Pair<String, Fragment>> = ArrayList()
         items.add(Pair("首页", HomeFragment()))
         items.add(Pair("监控", MonitorFragment()))
-        items.add(Pair("文件", FileFragment1()))
+        items.add(Pair("文件", FileFragment()))
 
         val pageAdapter = HomePageAdapter(supportFragmentManager, items)
         viewPager.adapter = pageAdapter
