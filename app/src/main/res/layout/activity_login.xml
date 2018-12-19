@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<com.scwang.wave.MultiWaveHeader
+		android:id="@+id/waveHeader"
+		android:layout_width="match_parent"
+		android:layout_height="200dp"
+		app:mwhVelocity="1"
+		app:mwhProgress="1"
+		app:mwhGradientAngle="45"
+		app:mwhWaveHeight="50dp"
+		app:mwhColorAlpha="0.45"
+		app:mwhStartColor="@color/colorPrimary"
+		app:mwhCloseColor="@color/colorPrimary"
+		app:mwhWaves="MultiWave"/>
+
+
+	<cn.bingoogolapple.imageview.BGAImageView
+		android:id="@+id/logo"
+		android:layout_width="90dp"
+		android:layout_height="90dp"
+		android:layout_marginTop="-85dp"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@id/waveHeader"
+		app:bga_iv_isCircle="true"
+		tools:src="@mipmap/ic_launcher_round"
+	/>
+
+
+	<EditText
+		android:id="@+id/edt_username"
+		android:layout_width="match_parent"
+		android:layout_height="35dp"
+		android:layout_marginTop="45dp"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_below="@id/waveHeader"
+		android:drawableStart="@drawable/ic_login_account"
+		android:drawablePadding="15dp"
+		android:padding="3dp"
+		android:inputType="textPersonName"
+		android:background="@android:color/transparent"
+		android:hint="请输入用户名"
+		android:textColor="#444444"
+		android:textSize="14sp"
+		android:text="admin"/>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginTop="2dp"
+		android:background="@color/colorGray"
+		android:layout_below="@+id/edt_username"/>
+
+	<EditText
+		android:id="@+id/edt_password"
+		android:layout_width="match_parent"
+		android:layout_height="35dp"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginTop="15dp"
+		android:layout_below="@id/edt_username"
+		android:layout_gravity="center_horizontal"
+		android:drawableStart="@drawable/ic_login_password"
+		android:drawablePadding="15dp"
+		android:padding="3dp"
+		android:background="@android:color/transparent"
+		android:textColor="#444444"
+		android:textSize="14sp"
+		android:hint="请输入密码"
+		android:inputType="textPassword"
+		android:imeOptions="actionNext"
+		android:text="123456"/>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginTop="2dp"
+		android:background="@color/colorGray"
+		android:layout_below="@+id/edt_password"/>
+
+	<ImageView
+		android:id="@+id/btn_delete"
+		android:layout_width="wrap_content"
+		android:layout_height="35dp"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:layout_marginTop="15dp"
+		android:layout_below="@id/edt_username"
+		android:padding="10dp"
+		android:layout_alignParentEnd="true"
+		android:src="@drawable/ic_login_delete"
+		android:visibility="invisible"
+		tools:visibility="visible"/>
+
+
+	<EditText
+		android:id="@+id/edt_host"
+		android:layout_width="match_parent"
+		android:layout_height="35dp"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginTop="15dp"
+		android:layout_below="@id/edt_password"
+		android:layout_gravity="center_horizontal"
+		android:drawableStart="@drawable/ic_login_host"
+		android:drawablePadding="15dp"
+		android:padding="3dp"
+		android:background="@android:color/transparent"
+		android:textColor="#444444"
+		android:textSize="14sp"
+		android:hint="请输入主机地址"
+		android:inputType="text"
+		android:imeOptions="actionDone"
+		android:text="http://test.phpweilai.cc/"/>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginTop="2dp"
+		android:background="@color/colorGray"
+		android:layout_below="@+id/edt_host"/>
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginTop="4dp"
+		android:layout_below="@+id/edt_host"
+		android:textColor="#CFCFCF"
+		android:text="例如:http://khj.com:8080/ (必须使用这种格式)"/>
+
+	<com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+		android:id="@+id/btn_login"
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:layout_marginTop="50dp"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_below="@id/edt_host"
+		android:padding="10dp"
+		android:textSize="15sp"
+		android:gravity="center"
+		app:qmui_radius="4dp"
+		app:qmui_backgroundColor="@color/colorPrimary"
+		android:textColor="@android:color/white"
+		app:qmui_borderColor="@color/colorPrimary"
+		android:text="登录"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#e6ebf4">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<!--Banner-->
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="150dp"
+			android:layout_margin="10dp"
+			android:scaleType="centerCrop"
+			android:src="@drawable/banner1"/>
+		<!--Banner-->
+
+
+		<!--3图标-->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:layout_marginBottom="10dp"
+			android:background="#fff">
+
+			<LinearLayout
+				android:layout_weight="1"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:orientation="vertical"
+				android:gravity="center_horizontal"
+				android:padding="10dp">
+
+				<ImageView
+					android:layout_width="50dp"
+					android:layout_height="50dp"
+					android:layout_marginBottom="10dp"
+					android:scaleType="centerCrop"
+					android:src="@drawable/ic_server"/>
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:text="星獾产品"	/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_weight="1"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:orientation="vertical"
+				android:gravity="center_horizontal"
+				android:padding="10dp">
+
+				<ImageView
+					android:layout_width="50dp"
+					android:layout_height="50dp"
+					android:layout_marginBottom="10dp"
+					android:scaleType="centerCrop"
+					android:src="@drawable/ic_server"/>
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:text="快环境"	/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_weight="1"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:orientation="vertical"
+				android:gravity="center_horizontal"
+				android:padding="10dp">
+
+				<ImageView
+					android:layout_width="50dp"
+					android:layout_height="50dp"
+					android:layout_marginBottom="10dp"
+					android:scaleType="centerCrop"
+					android:src="@drawable/ic_server"/>
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:text="关于星獾"	/>
+			</LinearLayout>
+
+
+
+
+		</LinearLayout>
+		<!--3图标-->
+
+		<!--广告位-->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="10dp"
+			android:background="#fff">
+
+			<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="150dp"
+				android:scaleType="centerCrop"
+				android:src="@drawable/banner1"/>
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:text="这是广告标题"/>
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:textColor="@color/colorGray"
+				android:text="这是广告内容"/>
+
+		</LinearLayout>
+
+		<!--广告位-->
+
+		<!--联系我们-->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_marginTop="10dp"
+			android:background="#FFF">
+
+			<!--顶部-->
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				android:text="联系我们"/>
+			<!--顶部-->
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<!--左边-->
+				<LinearLayout
+					android:layout_weight="1"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:gravity="center">
+
+						<ImageView
+							android:layout_width="50dp"
+							android:layout_height="50dp"
+							android:src="@mipmap/ic_launcher"
+							android:padding="10dp"/>
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="在线客服"/>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:gravity="center">
+
+						<ImageView
+							android:layout_width="50dp"
+							android:layout_height="50dp"
+							android:src="@mipmap/ic_launcher"
+							android:padding="10dp"/>
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="建议反馈"/>
+
+					</LinearLayout>
+
+
+				</LinearLayout>
+				<!--左边-->
+
+				<!--右边-->
+				<LinearLayout
+					android:layout_weight="1"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:gravity="center">
+
+						<ImageView
+							android:layout_width="50dp"
+							android:layout_height="50dp"
+							android:src="@mipmap/ic_launcher"
+							android:padding="10dp"/>
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="售前咨询"/>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:gravity="center">
+
+						<ImageView
+							android:layout_width="50dp"
+							android:layout_height="50dp"
+							android:src="@mipmap/ic_launcher"
+							android:padding="10dp"/>
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="提交工单"/>
+
+					</LinearLayout>
+
+
+				</LinearLayout>
+				<!--右边-->
+
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<!--联系我们-->
+
+		<!--底部-->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:gravity="center">
+
+			<ImageView
+				android:layout_width="50dp"
+				android:layout_height="50dp"
+				android:src="@mipmap/ic_launcher"
+				android:padding="10dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="星獾科技"/>
+
+		</LinearLayout>
+		<!--底部-->
+
+	</LinearLayout>
+
+</ScrollView>

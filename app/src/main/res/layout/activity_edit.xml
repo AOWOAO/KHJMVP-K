@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	tools:context=".activity.EditActivity">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/top"
+		android:layout_width="match_parent"
+		android:layout_height="?attr/actionBarSize">
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<TextView
+				android:id="@+id/btn_cancel"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				app:layout_constraintStart_toStartOf="parent"
+				android:gravity="center"
+				android:textSize="18sp"
+				android:padding="10dp"
+				android:textColor="@android:color/white"
+				android:text="取消"/>
+
+			<TextView
+				android:id="@+id/topTitle"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:gravity="center"
+				android:textSize="18sp"
+				android:textColor="@android:color/white"
+				tools:text="快环境"/>
+
+
+			<TextView
+				android:id="@+id/btn_save"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				android:gravity="center"
+				android:textSize="18sp"
+				android:padding="10dp"
+				android:textColor="@android:color/white"
+				android:text="保存"/>
+
+		</android.support.constraint.ConstraintLayout>
+
+	</android.support.design.widget.AppBarLayout>
+
+
+
+	<ScrollView
+		android:id="@+id/scrollView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@+id/top">
+
+		<com.xhkj.khjmvp.widget.LinedEditText
+			android:id="@+id/editView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:lineSpacingExtra="15sp"
+			android:gravity="top|center_vertical"
+			android:textColor="#000"
+			android:textSize="15sp"
+			android:scrollbars="vertical"
+			android:background="@android:color/transparent"
+			android:focusable="true"
+			android:selectAllOnFocus="true"
+			android:padding="5dp"/>
+
+	</ScrollView>
+
+
+	<!--<com.xhkj.khjmvp.widget.LinedEditText
+		android:id="@+id/editView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@+id/top"
+		android:lineSpacingExtra="15sp"
+		android:gravity="top|center_vertical"
+		android:textColor="#000"
+		android:textSize="15sp"
+		android:scrollbars="vertical"
+		android:background="@android:color/transparent"
+		android:focusable="true"
+		android:selectAllOnFocus="true"
+		android:padding="5dp"/>-->
+
+
+
+
+</RelativeLayout>

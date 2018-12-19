@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/hostImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:src="@drawable/ic_server"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:id="@+id/hostName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        tools:text="主机名: LinuxNB"/>
+
+                    <TextView
+                        android:id="@+id/hostSystem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        tools:text="系统: centos 64bit"/>
+
+                    <TextView
+                        android:id="@+id/hostSystemVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        tools:text="系统版本: 7.5.12345"/>
+
+                    <TextView
+                        android:id="@+id/hostCPU"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="1"
+                        tools:text="CPU: Intel(R) Xeon(R) CPU E5-2682 v4 @ 2.50GHz"/>
+
+                    <TextView
+                        android:id="@+id/hostCPUNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        tools:text="CPU核心数: 1核心"/>
+
+                    <TextView
+                        android:id="@+id/hostPythonVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        tools:text="Python版本: 2.7.1"/>
+
+                    <TextView
+                        android:id="@+id/hostRunTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        tools:text="运行时间: 140days"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/CpuCard"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="10dp">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:gravity="center_vertical">
+
+               <com.qmuiteam.qmui.widget.QMUIProgressBar
+                   android:id="@+id/CpuProgressBar"
+                   android:layout_width="100dp"
+                   android:layout_height="100dp"
+                   android:textColor="?attr/qmui_config_color_gray_4"
+                   android:textSize="20sp"
+                   app:qmui_background_color="?attr/qmui_config_color_gray_9"
+                   app:qmui_progress_color="@color/colorPrimary"
+                   app:qmui_stroke_width="5dp"
+                   android:layout_margin="10dp"
+                   app:qmui_type="type_circle" />
+
+               <TextView
+                   android:id="@+id/cpuTitle"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintLeft_toRightOf="@+id/CpuProgressBar"
+                   android:textSize="20sp" />
+
+
+           </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/MemoryCard"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <com.qmuiteam.qmui.widget.QMUIProgressBar
+                    android:id="@+id/MemoryProgressBar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:textColor="?attr/qmui_config_color_gray_4"
+                    android:textSize="20sp"
+                    app:qmui_background_color="?attr/qmui_config_color_gray_9"
+                    app:qmui_progress_color="@color/colorPrimary"
+                    app:qmui_stroke_width="5dp"
+                    android:layout_margin="10dp"
+                    app:qmui_type="type_circle" />
+
+                <TextView
+                    android:id="@+id/memoryTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/MemoryProgressBar"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/DiskCard"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <com.qmuiteam.qmui.widget.QMUIProgressBar
+                    android:id="@+id/DiskProgressBar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:textColor="?attr/qmui_config_color_gray_4"
+                    android:textSize="20sp"
+                    app:qmui_background_color="?attr/qmui_config_color_gray_9"
+                    app:qmui_progress_color="@color/colorPrimary"
+                    app:qmui_stroke_width="5dp"
+                    android:layout_margin="10dp"
+                    app:qmui_type="type_circle" />
+
+                <TextView
+                    android:id="@+id/diskTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/DiskProgressBar"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/netTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:text="网络流量"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    app:layout_constraintTop_toBottomOf="@+id/netTitle"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorGray"/>
+
+                <TextView
+                    android:id="@+id/netUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/netTitle"
+                    android:layout_margin="20dp"
+                    android:textSize="20sp"
+                    tools:text="上行速度: 5.65KB" />
+
+                <TextView
+                    android:id="@+id/netDown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/netTitle"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20sp"
+                    tools:text="下行速度: 5.65KB" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    app:layout_constraintTop_toBottomOf="@+id/netUp"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorGray"/>
+
+                <TextView
+                    android:id="@+id/netUpAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/netUp"
+                    android:layout_margin="20dp"
+                    android:textSize="20sp"
+                    tools:text="总发送: 3.56GB" />
+
+                <TextView
+                    android:id="@+id/netDownAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/netUp"
+                    app:layout_constraintLeft_toLeftOf="@+id/netDown"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20sp"
+                    tools:text="总接收: 9.80GB" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</ScrollView>

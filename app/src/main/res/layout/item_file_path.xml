@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_height="40dp">
+
+    <TextView
+        android:id="@+id/item_path"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_item_path_right"
+        tools:text="data"/>
+
+</android.support.constraint.ConstraintLayout>
+
