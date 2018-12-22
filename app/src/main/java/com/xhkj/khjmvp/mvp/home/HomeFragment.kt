@@ -62,16 +62,20 @@ class HomeFragment : MvpFragment<HomeContract.View, HomeContract.Presenter>(), H
     private fun initBanner() {
 
         val images = ArrayList<String>()
-        images.add("http://xinghuankj.com/img/banner1.jpg")
-        images.add("http://xinghuankj.com/img/Bottombackground.jpg")
+        images.add("http://p4.so.qhmsg.com/bdr/_240_/t01a50d86f455c0bf19.png")
+        images.add("http://p4.so.qhmsg.com/bdr/_240_/t014bb329d2cc017a89.jpg")
+        images.add("http://p1.so.qhimgs1.com/bdr/_240_/t01011e9ee975932e4d.jpg")
 
         val adImg = ArrayList<String>()
-        adImg.add("http://p0.so.qhmsg.com/bdr/_240_/t017d20f39d2394d9af.jpg")
-        adImg.add("http://p0.so.qhmsg.com/bdr/_240_/t01536414e191dd9595.jpg")
+        adImg.add("http://p5.so.qhimgs1.com/bdr/_240_/t01a5809d40660059bb.jpg")
+        adImg.add("http://p0.so.qhimgs1.com/bdr/_240_/t01c8372050bae51880.jpg")
+        adImg.add("http://p1.so.qhimgs1.com/bdr/_240_/t01825716b3e8d97d81.jpg")
 
         val adTitles = ArrayList<String>()
-        adTitles.add("中秋节快乐")
-        adTitles.add("中秋节快乐")
+        adTitles.add("素材均来自网络")
+        adTitles.add("版权归原作者所有")
+        adTitles.add("如有侵权请联系:110")
+
 
         banner.setImageLoader(GlideImageLoader())
         banner.setImages(images)

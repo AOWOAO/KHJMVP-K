@@ -30,7 +30,8 @@
 		<activity
 			android:name=".activity.EditActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden" />
-		<activity android:name=".activity.TestActivity" />
+		<activity android:name=".activity.TestActivity"
+			android:screenOrientation="sensorLandscape"/>
 		<activity android:name=".mvp.login.LoginActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden" />
 	</application>
